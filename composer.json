@@ -1,0 +1,12 @@
+{
+    "name": "notorious/phpiggy",
+    "description": "A PHP Application for balance management.",
+    "type": "project",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Framework\\": "src/Framework",
+            "App\\": "src/App"
+        }
+    }
+}
