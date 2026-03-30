@@ -18,4 +18,5 @@ class App
     public  function get(string $path,array $controller){
         $this->router->add("GET",$path,$controller);
     }
+
 }
