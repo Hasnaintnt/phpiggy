@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/src/App/Controllers/AboutController.php">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/src/App/Controllers/AboutController.php" />
+              <option name="originalContent" value="&lt;?php&#10;&#10;declare(strict_types=1);&#10;&#10;Namespace App\Controllers;&#10;&#10;use Framework\TemplateEngine;&#10;use App\Config\Paths;&#10;&#10;class AboutController{&#10;    private TemplateEngine $view;&#10;&#10;    public function __construct(){&#10;        $this-&gt;view = new TemplateEngine(paths::VIEW);&#10;    }&#10;    public function about(){&#10;        echo $this-&gt;view-&gt;render(&quot;about&quot;,[&#10;            'title' =&gt; &quot;About PHPiggy&quot;&#10;        ]);&#10;    }&#10;}" />
+              <option name="updatedContent" value="&lt;?php&#10;&#10;declare(strict_types=1);&#10;&#10;Namespace App\Controllers;&#10;&#10;use Framework\TemplateEngine;&#10;use App\Config\Paths;&#10;&#10;class AboutController{&#10;    private TemplateEngine $view;&#10;&#10;    public function __construct(){&#10;        $this-&gt;view = new TemplateEngine(paths::VIEW);&#10;    }&#10;    public function about(){&#10;        echo $this-&gt;view-&gt;render(&quot;about.php&quot;,[&#10;            'title' =&gt; &quot;About PHPiggy&quot;&#10;        ]);&#10;    }&#10;}" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
