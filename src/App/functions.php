@@ -8,3 +8,8 @@ function dd($value)
     var_dump($value);
     echo "</pre>";
 }
+
+function escape(mixed $value): string
+{
+    return htmlspecialchars((string)$value);
+}
