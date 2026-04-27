@@ -3,16 +3,15 @@
 declare(strict_types=1);
 
 use Framework\App;
-use App\Controllers\{HomeController,AboutController};
+use function App\Config\registerRoutes;
+use App\Config\Paths;
 
 require __DIR__ . "/../App/functions.php";
 
 require __DIR__ . "/../../vendor/autoload.php";
 
-$app = new App();
+$app = new App(Paths::SOURCE . "App/container-definitions.php");
 
-$app->get("/",[HomeController::class,"home"]);
-
-$app->get("/about",[AboutController::class,"about"]);
+registerRoutes($app);
 
 return $app;
