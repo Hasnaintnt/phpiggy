@@ -14,9 +14,8 @@ class AboutController{
         $this->view = new TemplateEngine(paths::VIEW);
     }
     public function about(){
-        echo $this->view->render("about.php",[
-            'title' => "About PHPiggy",
-            'dangerousData' => '<script> alert(123) </script>'
+        echo $this->view->render("about",[
+            'title' => "About PHPiggy"
         ]);
     }
 }

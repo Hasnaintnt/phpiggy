@@ -7,6 +7,7 @@ namespace Framework;
 class Router
 {
     private $routes = [];
+    private array $middlewares = [];
 
     public function add(string $method,string $path,array $controller){
         $path = $this->normalizePath($path);
@@ -34,8 +35,32 @@ class Router
                 continue;
             }
             [$class,$function] = $route["controller"];
-            $classInstance = new $class();
-            $classInstance->{$function}();
+            $classInstance = $container ?
+                $container->resolve($class) : new $class();
+
+            $action = fn() => $classInstance->{$function}();
+
+            foreach ($this->middlewares as $middleware){
+                $middlewareInstance = $container?
+                    $container->resolve($middleware) :
+                    new $middleware;
+                $action = fn() => $middlewareInstance->process($action);
+            }
+
+            $action();
+
+            return;
+            // Ternary operator
+            // the same code without ternary operator
+            //if($container){
+            //      $classInstance = $container->resolve($class);
+            //}else{
+            //    $classInstance = new $class();
+            //}
         }
+    }
+
+    public function addMiddleware(string $middleware){
+        $this->middlewares[] = $middleware;
     }
 }
