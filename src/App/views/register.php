@@ -3,7 +3,7 @@
 <section
     class="max-w-2xl mx-auto mt-12 p-4 bg-white shadow-md border border-gray-200 rounded"
 >
-    <form class="grid grid-cols-1 gap-6">
+    <form method="post" class="grid grid-cols-1 gap-6">
         <!-- Email -->
         <label class="block">
             <span class="text-gray-700">Email address</span>
@@ -73,7 +73,7 @@
                 <div>
                     <label class="inline-flex items-center">
                         <input
-
+                            name="tos"
                             class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50"
                             type="checkbox"
                         />
