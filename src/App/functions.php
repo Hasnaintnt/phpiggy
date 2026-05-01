@@ -14,6 +14,10 @@ function escape(mixed $value): string
     return htmlspecialchars((string)$value);
 }
 
+function e(string $value): string {
+    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+}
+
 function redirectTo(string $path)
 {
     header("Location: {$path}");

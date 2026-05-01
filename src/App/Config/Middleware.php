@@ -15,7 +15,7 @@ use App\Middleware\{
 function registerMiddleware(App $app)
 {
     $app->addMiddleware(TemplateDataMiddleware::class);
-    $app->addMiddleware(ValidationExceptionMiddleware::class);
-    $app->addMiddleware(FlashMiddleware::class);
+    $app->addMiddleware(FlashMiddleware::class);         // ← swapped
+    $app->addMiddleware(ValidationExceptionMiddleware::class); // ← swapped
     $app->addMiddleware(SessionMiddleware::class);
 }
