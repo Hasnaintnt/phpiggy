@@ -8,3 +8,15 @@ CREATE TABLE IF NOT EXISTS users(
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP not null ,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP not null
 );
+
+CREATE TABLE IF NOT EXISTS transactions(
+    id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+    description VARCHAR(255) NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    date DATETIME NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP not null,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP not null,
+    user_id BIGINT(20) NOT NULL,
+
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
