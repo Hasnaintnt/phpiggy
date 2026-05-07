@@ -15,6 +15,8 @@ class TransactionController
 
     public function createView()
     {
+
+        echo "test";
         echo $this->view->render("transactions/create.php");
     }
 }
