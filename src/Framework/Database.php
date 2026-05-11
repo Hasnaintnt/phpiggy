@@ -52,7 +52,13 @@ class Database
         return $this->connection->lastInsertId();
     }
 
-    public function getConnection(){
+    public function getConnection()
+    {
         return $this->connection;
+    }
+
+    public function findAll()
+    {
+        return $this->stmt->fetchAll();
     }
 }

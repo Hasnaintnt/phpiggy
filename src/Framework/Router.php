@@ -12,11 +12,14 @@ class Router
     public function add(string $method,string $path,array $controller){
         $path = $this->normalizePath($path);
 
+        $regexPath = preg_replace('#{[^/]+}#','([^/]+)',$path);
+
         $this->routes[] = [
             "path" => $path,
             "method" => strtoupper($method),
             "controller" => $controller,
-            'middlewares' => []
+            'middlewares' => [],
+            'regexPath' => $regexPath
         ];
     }
     private function normalizePath(string $path){
@@ -31,23 +34,32 @@ class Router
         $method = strtoupper($method);
 
         foreach ($this->routes as $route){
-            if(!preg_match("#^{$route["path"]}$#",$path) ||
+            if(!preg_match("#^{$route["regexPath"]}$#",$path,$paramValues) ||
                 $route["method"]!==$method){
                 continue;
             }
+
+            array_shift($paramValues);
+
+            preg_match_all('#{([^/]+)}#', $route['path'], $paramKeys);
+            $paramKeys = $paramKeys[1];
+            $params = $paramKeys ? array_combine($paramKeys, $paramValues) : [];
+
             [$class,$function] = $route["controller"];
             $classInstance = $container ?
                 $container->resolve($class) : new $class();
 
-            $action = fn() => $classInstance->{$function}();
+            $action = fn() => $classInstance->{$function}($params);
 
             $allMiddleware = [...$route["middlewares"],...$this->middlewares];
 
-            foreach ($allMiddleware as $middleware){
-                $middlewareInstance = $container?
+            foreach ($allMiddleware as $middleware) {
+                $middlewareInstance = $container ?
                     $container->resolve($middleware) :
                     new $middleware;
-                $action = fn() => $middlewareInstance->process($action);
+                $action = (function($next) use ($middlewareInstance) {
+                    return fn() => $middlewareInstance->process($next);
+                })($action);
             }
 
             $action();
